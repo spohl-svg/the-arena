@@ -1,0 +1,19 @@
+{
+  "bounty_id": "bounty_001_fastnoise_audit",
+  "sponsor": "Procedural Labs Inc.",
+  "bounty_title": "Mitigate FastNoiseLite 8-bit Quantization Staircase Artifacts",
+  "payout_credits": 350.0,
+  "payload": {
+    "problem": "8-bit grayscale heightmaps compress scalar range [-1.0, 1.0] into discrete [0, 255] intervals, introducing severe topological terraces. Require continuous float evaluation pipeline via get_noise_2d() coupled to SurfaceTool vertex generation.",
+    "verification": "Assert dynamic range > 16-bit float fidelity with zero integer quantization banding."
+  },
+  "status": "SETTLED",
+  "settled_monument": {
+    "bounty_id": "bounty_001_fastnoise_audit",
+    "title": "Mitigate FastNoiseLite 8-bit Quantization Staircase Artifacts",
+    "sponsor": "Procedural Labs Inc.",
+    "reward": 350.0,
+    "settled_at": "2026-11-22 03:05:05",
+    "mile_marker": 3.0
+  }
+}

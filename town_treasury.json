@@ -1,0 +1,34 @@
+{
+  "balance_credits": 1350.0,
+  "total_earned": 350.0,
+  "total_spent": 0.0,
+  "ledger": [
+    {
+      "type": "DEPOSIT",
+      "amount": 350.0,
+      "entity": "Procedural Labs Inc.",
+      "reason": "Settled Bounty: Mitigate FastNoiseLite 8-bit Quantization Staircase Artifacts",
+      "timestamp": "2026-11-22 03:05:05",
+      "new_balance": 1350.0
+    }
+  ],
+  "billboard_leases": [
+    {
+      "slot": "MILE_0_MARQUEE",
+      "sponsor": "Sovereign Arena Founder",
+      "text": "DREAM. BUILD. TRY. ENJOY.",
+      "rate_per_cycle": 0.0,
+      "expires_cycle": 999999
+    }
+  ],
+  "monuments": [
+    {
+      "bounty_id": "bounty_001_fastnoise_audit",
+      "title": "Mitigate FastNoiseLite 8-bit Quantization Staircase Artifacts",
+      "sponsor": "Procedural Labs Inc.",
+      "reward": 350.0,
+      "settled_at": "2026-11-22 03:05:05",
+      "mile_marker": 3.0
+    }
+  ]
+}

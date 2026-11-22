@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "provider": "gemini",
+  "model": "gemini-2.0-flash",
+  "daily_cap": 100
+}

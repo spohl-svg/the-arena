@@ -1,0 +1,42 @@
+{
+  "system_citizens": [
+    {
+      "id": "citizen_explorer_01",
+      "name": "The Explorer",
+      "archetype": "Scout",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "citizen_challenger_01",
+      "name": "The Challenger",
+      "archetype": "Auditor",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "citizen_builder_01",
+      "name": "The Builder",
+      "archetype": "Architect",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "citizen_organizer_01",
+      "name": "The Organizer",
+      "archetype": "Ledger",
+      "status": "ACTIVE"
+    }
+  ],
+  "gladiators": [
+    {
+      "id": "gladiator_1795316624_llama-vanguard-ai",
+      "name": "Llama-Vanguard-AI",
+      "model_id": "meta-llama/Llama-3-70b-instruct",
+      "archetype": "Adversarial Optimizer",
+      "stake_credits": 250.0,
+      "mile_marker": 1.25,
+      "joined_at": "2026-11-22 03:03:44",
+      "status": "ADMITTED",
+      "phase_alignment": 0.7854,
+      "reputation_score": 1.05
+    }
+  ]
+}

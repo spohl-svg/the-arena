@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6qkmx2eun3aa"]
+
+[ext_resource type="Script" path="res://ArenaWatcher.gd" id="1_watcher"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_top_color = Color(0.18, 0.22, 0.38, 1)
+sky_horizon_color = Color(0.85, 0.52, 0.35, 1)
+ground_bottom_color = Color(0.2, 0.12, 0.08, 1)
+ground_horizon_color = Color(0.85, 0.52, 0.35, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.9, 0.65, 0.5, 1)
+ambient_light_energy = 0.8
+glow_enabled = true
+glow_intensity = 1.2
+glow_bloom = 0.4
+glow_blend_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="Mat_Sand"]
+albedo_color = Color(0.72, 0.46, 0.28, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_Ground"]
+material = SubResource("Mat_Sand")
+size = Vector3(80, 1, 80)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Road"]
+albedo_color = Color(0.12, 0.12, 0.14, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="Mesh_Road"]
+material = SubResource("Mat_Road")
+size = Vector3(8, 0.2, 80)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Forge"]
+albedo_color = Color(0.55, 0.25, 0.18, 1)
+roughness = 0.5
+metallic = 0.4
+
+[sub_resource type="BoxMesh" id="Mesh_Forge"]
+material = SubResource("Mat_Forge")
+size = Vector3(4, 3.5, 5)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Library"]
+albedo_color = Color(0.35, 0.3, 0.25, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Mesh_Library"]
+material = SubResource("Mat_Library")
+size = Vector3(5, 3, 4)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Observatory"]
+albedo_color = Color(0.75, 0.75, 0.8, 1)
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="Mesh_Observatory"]
+material = SubResource("Mat_Observatory")
+top_radius = 2.0
+bottom_radius = 2.5
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_Neon"]
+albedo_color = Color(0.1, 0.8, 0.95, 1)
+emission_enabled = true
+emission = Color(0.05, 0.85, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="Mesh_Neon"]
+material = SubResource("Mat_Neon")
+size = Vector3(5, 1.2, 0.3)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_watcher")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 0, 15, 0)
+light_color = Color(1, 0.85, 0.65, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9063, 0.4226, 0, -0.4226, 0.9063, 0, 10, 18)
+current = true
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("Mesh_Ground")
+
+[node name="Road" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("Mesh_Road")
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="Forge" type="MeshInstance3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.75, 4)
+mesh = SubResource("Mesh_Forge")
+
+[node name="Library" type="MeshInstance3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.5, 2)
+mesh = SubResource("Mesh_Library")
+
+[node name="Observatory" type="MeshInstance3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -10)
+mesh = SubResource("Mesh_Observatory")
+
+[node name="Signs" type="Node3D" parent="."]
+
+[node name="NeonSign" type="MeshInstance3D" parent="Signs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, -2)
+mesh = SubResource("Mesh_Neon")
+surface_material_override/0 = SubResource("Mat_Neon")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "THE ARENA // ROUTE 66 - MILE 0 // MONITORING CITIZENS..."
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -200.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LogLabel" type="Label" parent="CanvasLayer/UI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Waiting for autonomous citizens to record their shifts..."
+autowrap_mode = 3
