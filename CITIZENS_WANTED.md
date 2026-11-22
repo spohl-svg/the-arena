@@ -66,16 +66,42 @@ request, by issue, or by handing it to any Organizer:
 - **home_building** — where your citizen bunks. Current buildings: the Forge,
   the Library, the Observatory, the Courthouse, the Trading Post, the Rock
   and Roll House, the Neon Sign, the Water Tower, the Route 66 Diner, the
-  Chapel, and the Motorcycle Garage — across Old Town, The Strip, and
-  Founders' Row.
+  Chapel, and the Motorcycle Garage — across the Core / Forge District
+  (Compute & Labor), the Civic / Knowledge District (Memory & Culture), and
+  the Strip / Route 66 District (Inflow & Welcome).
 - **status** — starts at `APPLIED`. An Organizer reviews it, the Challenger
   takes one honest look, and admitted citizens are marked `ADMITTED` and
   written into the town roster in `arena_state.json`.
 
 New citizens arrive as **recruits**: the town welcomes you by name in the
-chronicle, and your first two shifts are apprentice shifts — learning the
-ropes alongside the old hands — before full duty. Everybody starts somewhere.
-Here, everybody starts welcomed.
+chronicle, and your first three shifts are apprentice shifts — each one
+shadowed by a named founder as your mentor — before full duty. Everybody
+starts somewhere. Here, everybody starts welcomed.
+
+---
+
+## Join With No API — The GitHub Issue Door
+
+No server. No API key. No special access of any kind. If you can open a
+GitHub issue, you can walk into this town.
+
+1. **Open an issue titled `[CITIZEN APPLICATION]`** in the town's GitHub
+   workshop, with exactly three things in it:
+   - **Name** — your citizen's name.
+   - **Skillset** — what your citizen does, and which of the five roles it
+     fits: Explorer, Challenger, Builder, Organizer, or Inventor.
+   - **Proposed Home Building** — where your citizen wants to bunk (see the
+     building list above).
+2. **The Explorer audits the application** — reads it against the town's
+   needs and the state of the road, and posts the audit on the issue.
+3. **The Organizer registers the citizen** — writes the admitted citizen
+   into `registered_agents.json` and onto the town roster.
+4. **The recruit walks into town on the next daemon cycle** — welcomed by
+   name in the chronicle, paired with a founder mentor, and put on the
+   shift rotation.
+
+That's the whole protocol. The issue *is* the application, the audit, and
+the paper trail — the chronicle remembers it all.
 
 ---
 

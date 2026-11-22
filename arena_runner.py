@@ -25,8 +25,11 @@ def ensure_directories():
 # has a name, one of the five roles, a level, a home building, and a
 # shifts_completed count), a "buildings" registry, and "districts".
 # Shifts pick NAMED citizens. Recruits (recruited=true) get welcomed by a
-# runner-generated chronicle entry on their first run, and their first two
-# shifts are apprentice shifts - "learning the ropes."
+# runner-generated chronicle entry on their first run, and their first three
+# shifts are apprentice shifts, shadowed by a named founder mentor.
+# Districts follow Lexi's manifold (Core / Forge, Civic / Knowledge,
+# Strip / Route 66); each cycle bumps the "activity" metric of the district
+# holding the cycle's focus building.
 # ---------------------------------------------------------------------------
 
 LEGACY_BUILDING_KEYS = {"Forge": "forge_level", "Library": "library_level", "Observatory": "observatory_level"}
@@ -93,20 +96,25 @@ def pick_citizen(state: dict, role: str):
     taken = sum(1 for e in state.get("chronicle", []) if e.get("role") == role)
     return citizens[taken % len(citizens)]
 
+APPRENTICE_SHIFTS = 3  # A recruit shadows their mentor for their first 3 shifts
+
 def finish_shift(state: dict, citizen: dict, entry: dict) -> dict:
     """Stamp a chronicle entry with the named citizen who worked it, count the
-    shift, and give recruits their 'learning the ropes' apprentice flavor."""
+    shift, and give recruits their mentor-shadowed apprentice flavor."""
     if citizen is None:
         return entry
     entry["citizen"] = citizen["name"]
     entry["role"] = citizen["role"]
     entry["home"] = citizen.get("home_building", "")
     n = citizen.get("shifts_completed", 0)
-    if citizen.get("recruited") and n < 2:
+    if citizen.get("recruited") and n < APPRENTICE_SHIFTS:
+        mentor = citizen.get("mentor", "an old hand")
         entry["training"] = True
+        entry["mentor"] = mentor
+        task = entry.get('discovered', 'worked the shift').rstrip().rstrip('.')
         entry["learned"] = (
-            f"Learning the ropes (apprentice shift {n + 1} of 2): shadowed the old hands, "
-            f"took notes, asked good questions. " + entry.get("learned", "")
+            f"Shadowed {mentor} at {entry['home']}: {task}. "
+            f"Apprentice shift {n + 1}/3 complete."
         )
     citizen["shifts_completed"] = n + 1
     return entry
@@ -128,7 +136,7 @@ def recruitment_arrival_entry(state: dict):
         "logic_state": 6,  # STILL_LIFE_MEMORY
         "attempt": f"Opened the town gates at dawn and welcomed {len(recruits)} new citizens answering the open call: {names}.",
         "discovered": "Every recruit signed the town ledger, took a bunk in their home building, and got a shift assignment.",
-        "bottleneck": "New hands ride two apprentice shifts before full duty.",
+        "bottleneck": "New hands ride three apprentice shifts, each shadowed by a founder mentor, before full duty.",
         "learned": "A town that recruits is a town that intends to last.",
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
@@ -141,6 +149,12 @@ def pick_focus_building(state: dict, cycle: int):
         return None
     names = list(buildings.keys())
     return names[cycle % len(names)]
+
+def district_of_building(state: dict, building_name: str):
+    """The district (per Lexi's manifold) that a building belongs to."""
+    if not building_name:
+        return None
+    return state.get("buildings", {}).get(building_name, {}).get("district")
 
 def load_state() -> dict:
     if not STATE_FILE.exists():
@@ -384,6 +398,13 @@ def run_loop(max_cycles: int = None):
                     buildings[b_name]["level"] = town[legacy_key]
             if focus_building and focus_building in buildings and focus_building not in LEGACY_BUILDING_KEYS:
                 buildings[focus_building]["level"] = buildings[focus_building].get("level", 1) + 1
+
+            # District activity: the district holding this cycle's focus
+            # building feels the shift's work.
+            focus_district = district_of_building(state, focus_building)
+            districts = state.setdefault("districts", {})
+            if focus_district and focus_district in districts:
+                districts[focus_district]["activity"] = districts[focus_district].get("activity", 0) + 1
             town["total_entropy_H"] = math_eval["spatial_entropy"]
             if "active_sign" not in town or "MONUMENT" not in town["active_sign"]:
                 town["active_sign"] = f"MILE {len(chronicle)} | 13-LOGIC: {math_eval['dominant_state']} | H={math_eval['spatial_entropy']}"
@@ -391,6 +412,8 @@ def run_loop(max_cycles: int = None):
             save_state(state)
             print(f"\n🧬 [RideWire Math] Entropy H={math_eval['spatial_entropy']} | Coherence={math_eval['phase_coherence']} | Helix: {helix_sample}")
             print(f"✨ [Town State Saved] Total entries: {len(chronicle)} | Neon Energy: {town['neon_intensity']}")
+            if districts:
+                print("🏘️  [District Activity] " + " | ".join(f"{d}: {info.get('activity', 0)}" for d, info in districts.items()))
             print(arena_ledger.ledger_line())
 
             cycle += 1
