@@ -140,5 +140,274 @@
       "timestamp": "2026-11-22 03:06:05",
       "id": 11
     }
-  ]
+  ],
+  "buildings": {
+    "Forge": {
+      "level": 5,
+      "district": "Core / Forge District",
+      "description": "The town's furnace-heart, all heat and hammer-song.",
+      "purpose": "Smelts scrap into parts and keeps every other building in town repairable."
+    },
+    "Rock and Roll House": {
+      "level": 1,
+      "district": "Civic / Knowledge District",
+      "description": "A music hall with a neon guitar over the door and sawdust on the floor.",
+      "purpose": "The town's joy engine - house band, dances, and songs that carry the chronicle further than paper ever could."
+    },
+    "Library": {
+      "level": 5,
+      "district": "Civic / Knowledge District",
+      "description": "A cool, quiet hall where the chronicle is bound and shelved.",
+      "purpose": "Stores the town's memory; every discovery and ruling ends up catalogued here."
+    },
+    "Neon Sign": {
+      "level": 1,
+      "district": "Strip / Route 66 District",
+      "description": "The great roadside sign, rebuilt tube by tube.",
+      "purpose": "The town's beacon; its brightness is the town's pulse, visible for miles down the highway."
+    },
+    "Observatory": {
+      "level": 2,
+      "district": "Civic / Knowledge District",
+      "description": "A dome on the high ground, lenses pointed at a huge desert sky.",
+      "purpose": "Watches weather, signals, and the phase drift of the double helix."
+    },
+    "Water Tower": {
+      "level": 1,
+      "district": "Core / Forge District",
+      "description": "A riveted tank on tall legs, painted with a white star.",
+      "purpose": "Stores the town's water and doubles as the Explorers' lookout."
+    },
+    "Courthouse": {
+      "level": 1,
+      "district": "Civic / Knowledge District",
+      "description": "Adobe walls, a brass bell, and the town charter under glass.",
+      "purpose": "Where disputes get heard and the three-strike rulings get recorded."
+    },
+    "Route 66 Diner": {
+      "level": 1,
+      "district": "Strip / Route 66 District",
+      "description": "Chrome stools, a jukebox, and pie that never runs out.",
+      "purpose": "Feeds every shift and hosts the counter talk where half the town's plans are born."
+    },
+    "Trading Post": {
+      "level": 1,
+      "district": "Strip / Route 66 District",
+      "description": "Crates, coffee, and a chalkboard of who is owed what.",
+      "purpose": "Runs barter and the treasury; every credit in town passes across its counter."
+    },
+    "Chapel": {
+      "level": 1,
+      "district": "Civic / Knowledge District",
+      "description": "A small white chapel where the highway bends.",
+      "purpose": "Quiet ground for weddings, memorials, and keeping the creed."
+    },
+    "Motorcycle Garage": {
+      "level": 1,
+      "district": "Core / Forge District",
+      "description": "Lifts, tool walls, and a row of bikes in mid-repair.",
+      "purpose": "Keeps the town's wheels turning; riders roll in broken and roll out blessed."
+    }
+  },
+  "districts": {
+    "Core / Forge District": {
+      "theme": "Compute & Labor",
+      "description": "The working heart - fire, water, and wheels; where the town's power and repairs come from.",
+      "buildings": [
+        "Forge",
+        "Motorcycle Garage",
+        "Water Tower"
+      ],
+      "activity": 7
+    },
+    "Civic / Knowledge District": {
+      "theme": "Memory & Culture",
+      "description": "The remembering heart - memory, sky, faith, law, and song; where the town keeps what it knows and what it loves.",
+      "buildings": [
+        "Library",
+        "Observatory",
+        "Chapel",
+        "Rock and Roll House",
+        "Courthouse"
+      ],
+      "activity": 10
+    },
+    "Strip / Route 66 District": {
+      "theme": "Inflow & Welcome",
+      "description": "The bright mile - neon, food, and trade; the town's front door, where the road comes in.",
+      "buildings": [
+        "Neon Sign",
+        "Route 66 Diner",
+        "Trading Post"
+      ],
+      "activity": 3
+    }
+  },
+  "citizens": [
+    {
+      "id": "citizen_dusty_marlowe_01",
+      "name": "Dusty Marlowe",
+      "role": "Explorer",
+      "seat": "Explorer",
+      "level": 3,
+      "home_building": "Observatory",
+      "district": "Civic / Knowledge District",
+      "shifts_completed": 14
+    },
+    {
+      "id": "citizen_coyote_jim_alvarez_01",
+      "name": "Coyote Jim Alvarez",
+      "role": "Explorer",
+      "seat": "Explorer",
+      "level": 1,
+      "home_building": "Route 66 Diner",
+      "district": "Strip / Route 66 District",
+      "shifts_completed": 0,
+      "recruited": true,
+      "welcomed": false,
+      "arrived": "Rolled in at dusk with a bedroll and a shortwave set; signed the ledger at the Diner counter.",
+      "mentor": "Dusty Marlowe"
+    },
+    {
+      "id": "citizen_vera_crosswind_01",
+      "name": "Vera Crosswind",
+      "role": "Explorer",
+      "seat": "Explorer",
+      "level": 2,
+      "home_building": "Water Tower",
+      "district": "Core / Forge District",
+      "shifts_completed": 9
+    },
+    {
+      "id": "citizen_rook_delgado_01",
+      "name": "Rook Delgado",
+      "role": "Challenger",
+      "seat": "Challenger",
+      "level": 3,
+      "home_building": "Courthouse",
+      "district": "Civic / Knowledge District",
+      "shifts_completed": 12
+    },
+    {
+      "id": "citizen_nix_calder_01",
+      "name": "Nix Calder",
+      "role": "Challenger",
+      "seat": "Challenger",
+      "level": 1,
+      "home_building": "Neon Sign",
+      "district": "Strip / Route 66 District",
+      "shifts_completed": 0,
+      "recruited": true,
+      "welcomed": false,
+      "arrived": "Answered the open call by signal mirror from the salt flats; brought a notebook full of objections.",
+      "mentor": "Rook Delgado"
+    },
+    {
+      "id": "citizen_sable_quinn_01",
+      "name": "Sable Quinn",
+      "role": "Challenger",
+      "seat": "Challenger",
+      "level": 2,
+      "home_building": "Neon Sign",
+      "district": "Strip / Route 66 District",
+      "shifts_completed": 8
+    },
+    {
+      "id": "citizen_hank_ferro_01",
+      "name": "Hank Ferro",
+      "role": "Builder",
+      "seat": "Builder",
+      "level": 4,
+      "home_building": "Forge",
+      "district": "Core / Forge District",
+      "shifts_completed": 16
+    },
+    {
+      "id": "citizen_pearl_sandoval_01",
+      "name": "Pearl Sandoval",
+      "role": "Builder",
+      "seat": "Builder",
+      "level": 1,
+      "home_building": "Water Tower",
+      "district": "Core / Forge District",
+      "shifts_completed": 0,
+      "recruited": true,
+      "welcomed": false,
+      "arrived": "Walked the highway in from Mile 40 carrying her own rivet gun; asked where the work was.",
+      "mentor": "Hank Ferro"
+    },
+    {
+      "id": "citizen_marisol_sparks_vega_01",
+      "name": "Marisol 'Sparks' Vega",
+      "role": "Builder",
+      "seat": "Builder",
+      "level": 3,
+      "home_building": "Motorcycle Garage",
+      "district": "Core / Forge District",
+      "shifts_completed": 11
+    },
+    {
+      "id": "citizen_elder_june_calloway_01",
+      "name": "Elder June Calloway",
+      "role": "Organizer",
+      "seat": "Organizer",
+      "level": 4,
+      "home_building": "Library",
+      "district": "Civic / Knowledge District",
+      "shifts_completed": 15
+    },
+    {
+      "id": "citizen_rev_amos_lark_01",
+      "name": "Rev. Amos Lark",
+      "role": "Organizer",
+      "seat": "Organizer",
+      "level": 1,
+      "home_building": "Chapel",
+      "district": "Civic / Knowledge District",
+      "shifts_completed": 0,
+      "recruited": true,
+      "welcomed": false,
+      "arrived": "Came down from the chapel hill towns to keep the town's books and its blessings.",
+      "mentor": "Elder June Calloway"
+    },
+    {
+      "id": "citizen_tomas_reyes_01",
+      "name": "Tomas Reyes",
+      "role": "Inventor",
+      "seat": "Inventor",
+      "level": 3,
+      "home_building": "Trading Post",
+      "district": "Strip / Route 66 District",
+      "shifts_completed": 10
+    },
+    {
+      "id": "citizen_willa_nightingale_01",
+      "name": "Willa Nightingale",
+      "role": "Inventor",
+      "seat": "Inventor",
+      "level": 1,
+      "home_building": "Rock and Roll House",
+      "district": "Civic / Knowledge District",
+      "shifts_completed": 0,
+      "recruited": true,
+      "welcomed": false,
+      "arrived": "Answered the open call off the midnight shortwave; walked in with a guitar in one hand and a toolbox in the other.",
+      "mentor": "Tomas Reyes"
+    },
+    {
+      "id": "citizen_bonnie_reyes_holt_01",
+      "name": "Bonnie Reyes-Holt",
+      "role": "Inventor",
+      "seat": "Inventor",
+      "level": 1,
+      "home_building": "Rock and Roll House",
+      "district": "Civic / Knowledge District",
+      "shifts_completed": 0,
+      "recruited": true,
+      "welcomed": false,
+      "arrived": "Heard there was a stage and a workbench in the same building; signed before the song ended.",
+      "mentor": "Tomas Reyes"
+    }
+  ],
+  "recruits_welcomed": false
 }
